@@ -1,0 +1,93 @@
+@model RegisterViewModel
+@{
+    ViewData["Title"] = "Đăng ký tài khoản";
+}
+<div class="row justify-content-center py-3">
+    <div class="col-md-10 col-lg-7 col-xl-6">
+        <div class="card-soft p-4 p-md-5">
+            <div class="text-center mb-4">
+                <span class="brand-icon mx-auto mb-3" style="width:52px;height:52px;font-size:1.4rem"><i class="fa-solid fa-graduation-cap"></i></span>
+                <h3 class="fw-bold mb-1">Tạo tài khoản EduMatch</h3>
+                <p class="text-muted small mb-0">Đã có tài khoản? <a asp-action="Login" class="fw-semibold">Đăng nhập ngay</a></p>
+            </div>
+
+            <form asp-action="Register" method="post" novalidate>
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger py-2 small"></div>
+
+                <!-- 2 nút chọn vai trò đối xứng hoàn toàn, chiều cao bằng nhau tuyệt đối -->
+                <div class="row g-3 mb-3">
+                    <div class="col-6">
+                        <input type="radio" class="btn-check" name="VaiTro" id="rParent" value="Parent" checked="@(Model.VaiTro == "Parent")" />
+                        <label class="btn btn-outline-primary w-100 rounded-4 role-choice-btn h-100 d-flex flex-column align-items-center justify-content-center text-center p-3" for="rParent">
+                            <i class="fa-solid fa-people-roof fs-3 mb-2"></i>
+                            <span class="fw-bold">Phụ huynh / Học sinh</span>
+                        </label>
+                    </div>
+                    <div class="col-6">
+                        <input type="radio" class="btn-check" name="VaiTro" id="rTutor" value="Tutor" checked="@(Model.VaiTro == "Tutor")" />
+                        <label class="btn btn-outline-primary w-100 rounded-4 role-choice-btn h-100 d-flex flex-column align-items-center justify-content-center text-center p-3" for="rTutor">
+                            <i class="fa-solid fa-chalkboard-user fs-3 mb-2"></i>
+                            <span class="fw-bold">Gia sư dạy kèm</span>
+                        </label>
+                    </div>
+                </div>
+                <span asp-validation-for="VaiTro"></span>
+
+                <div class="mb-3">
+                    <label asp-for="HoTen" class="form-label"></label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-white"><i class="fa-regular fa-user text-muted"></i></span>
+                        <input asp-for="HoTen" class="form-control" placeholder="Nguyễn Văn A" autocomplete="name" />
+                    </div>
+                    <span asp-validation-for="HoTen"></span>
+                </div>
+
+                <!-- 2 cột đối xứng 50% - 50% trên máy tính, xếp dọc mượt mà trên điện thoại -->
+                <div class="row g-3">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Email" class="form-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white"><i class="fa-regular fa-envelope text-muted"></i></span>
+                            <input asp-for="Email" class="form-control" placeholder="email@example.com" autocomplete="email" />
+                        </div>
+                        <span asp-validation-for="Email"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="SoDienThoai" class="form-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white"><i class="fa-solid fa-phone text-muted"></i></span>
+                            <input asp-for="SoDienThoai" class="form-control" placeholder="09xxxxxxxx" autocomplete="tel" />
+                        </div>
+                        <span asp-validation-for="SoDienThoai"></span>
+                    </div>
+                </div>
+
+                <!-- 2 cột mật khẩu đối xứng 50% - 50% -->
+                <div class="row g-3">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Password" class="form-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white"><i class="fa-solid fa-lock text-muted"></i></span>
+                            <input asp-for="Password" type="password" class="form-control" autocomplete="new-password" />
+                        </div>
+                        <span asp-validation-for="Password"></span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="ConfirmPassword" class="form-label"></label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white"><i class="fa-solid fa-lock-check text-muted"></i></span>
+                            <input asp-for="ConfirmPassword" type="password" class="form-control" autocomplete="new-password" />
+                        </div>
+                        <span asp-validation-for="ConfirmPassword"></span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 py-2.5 rounded-pill fw-bold shadow-sm mt-2">
+                    <i class="fa-solid fa-user-plus me-1"></i> Đăng ký tài khoản
+                </button>
+                <p class="small text-muted text-center mt-3 mb-0">Gia sư mới cần tải lên bằng cấp / thẻ sinh viên để được quản trị viên cấp Tích xanh.</p>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }
